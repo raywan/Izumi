@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Izumi</title>
+  {% block includes %}
+  <link rel="stylesheet" type="text/css" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}" />
+  <script src="{% static 'bower_components/react/JSXTransformer.js' %}"></script>
+  <script src="{% static 'bower_components/react/react.min.js' %}"></script>
+  <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+  {% endblock %}
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <nav>
+        <ul class="nav nav-pills">
+          <li role="presentation"><a href="{% url 'index' %}">Home</a></li>
+          <li role="presentation"><a href="{% url 'directory' %}">Directory</a></li>
+          {% if isLoggedIn %}
+            <li role="presentation"><a href="{% url 'create_post'%}">Add</a></li>
+            <li role="presentation"><a href="{% url 'logout'%}">Logout</a></li>
+          {% else %}
+            <li role="presentation"><a href="{% url 'login' %}">Login</a></li>
+            <li role="presentation"><a href="{% url 'register' %}">Register</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    {% block content %}
+      <div class="content">
+        YOU'RE NOT SUPPOSED TO SEE THIS.
+      </div>
+    {% endblock %}
+  </div>
+  {% block react-components %}
+  {% endblock %}
+</body>
+
+</html>

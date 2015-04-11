@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block includes %}
+{{ block.super }}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDQ7n1InPq4zJjuhiZGflMlys62OpJue8"
+  type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="content">
+    <div class="map">
+    </div>
+    <div class="recent-container">
+    </div>
+  </div>
+{% endblock %}
+
+{% block react-components %}
+  <script type="text/jsx" src="{% static 'js/components/RecentBox.react.js' %}"></script>
+  <script type="text/jsx" src="{% static 'js/components/Map.react.js' %}"></script>
+{% endblock %}
