@@ -20,7 +20,7 @@
           <li role="presentation"><a href="{% url 'index' %}">Home</a></li>
           <li role="presentation"><a href="{% url 'directory' %}">Directory</a></li>
           {% if isLoggedIn %}
-            <li role="presentation"><a href="{% url 'create_post'%}">Add</a></li>
+            <li role="presentation"><a href="{% url 'create_source'%}">Add</a></li>
             <li role="presentation"><a href="{% url 'logout'%}">Logout</a></li>
           {% else %}
             <li role="presentation"><a href="{% url 'login' %}">Login</a></li>

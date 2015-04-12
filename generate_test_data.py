@@ -1,23 +1,22 @@
 import random
-from django.contrib.auth.models import User
 from api.models import Source, Event
 from app.models import IzumiUser
 from django.utils import timezone
 
-def generate_users(num):
-    for i in range(num):
-        new_user = User.objects.create_user(
-            username=
-            email=
-            first_name=
-            last_name=
-            password=
-        )
-        new_izumi_user = IzumiUser(
-            user=new_user,
-            organization=form.cleaned_data.get('organization'),
-        )
-        new_izumi_user.save()
+# def generate_users(num):
+#     for i in range(num):
+#         new_user = User.objects.create_user(
+#             username=
+#             email=
+#             first_name=
+#             last_name=
+#             password=
+#         )
+#         new_izumi_user = IzumiUser(
+#             user=new_user,
+#             organization=form.cleaned_data.get('organization'),
+#         )
+#         new_izumi_user.save()
 
 def generate_sources(num):
     for i in range(num):
@@ -31,18 +30,22 @@ def generate_sources(num):
         macroscopic_pollution = random.randint(0,100)
         thermal_pollution =  random.randint(0,100)
         new_source = Source(
-            author =
-            date_created = timezone.now()
-            last_update = timezone.now()
+            author = random.choice(IzumiUser.objects.all()),
+            date_created = timezone.now(),
+            last_update = timezone.now(),
             latitude=lat,
             longitude=lng,
             source_type=source_type,
-            pathogen_pollution = pathogen_pollution
-            inorganic_pollution = inorganic_pollution
-            organic_pollution = organic_pollution
-            macroscopic_pollution = macroscopic_pollution
-            thermal_pollution = thermal_pollution
+            pathogen_pollution = pathogen_pollution,
+            inorganic_pollution = inorganic_pollution,
+            organic_pollution = organic_pollution,
+            macroscopic_pollution = macroscopic_pollution,
+            thermal_pollution = thermal_pollution,
             )
+        new_souce.save()
 
 def generate_events(num):
     pass
+
+
+generate_sources(5)

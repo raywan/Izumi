@@ -1,26 +1,26 @@
 var Map = React.createClass({
   componentWillMount: function() {
+    var source_slug = window.location.pathname;
+    console.log("http://localhost:8000/api" + source_slug);
+
     $.ajax({
       type: "GET",
-      url: "http://localhost:8000/api/sources",
+      url: "http://localhost:8000/api" + source_slug,
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(data, status, jqXHR) {
-        var myLatlng = new google.maps.LatLng(0,0);
         var mapOptions = {
-          center: myLatlng,
-          zoom: 1
+          center: new google.maps.LatLng(data.latitude,data.longitude),
+          zoom: 10 
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"),
           mapOptions);
 
-        for (var i = 0; i < data.length; i++) {
-          var coords = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-          var marker = new google.maps.Marker({
-            position: coords,
-            map: map,
-          });
-        }
+        var coords = new google.maps.LatLng(data.latitude, data.longitude);
+        var marker = new google.maps.Marker({
+          position: coords,
+          map: map,
+        });
       },
     });
   },

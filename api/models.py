@@ -14,26 +14,30 @@ class Source(models.Model):
 
     author = models.ForeignKey(IzumiUser)
     date_created = models.DateTimeField()
-    last_update = models.DateTimeField()
+    last_updated = models.DateTimeField()
     latitude = models.DecimalField(max_digits=8, decimal_places=6, null=False)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=False)
     source_type = models.CharField(max_length=20, choices=SOURCE_CHOICES)
-    pathogen_pollution = models.IntegerField()
-    inorganic_pollution = models.IntegerField()
-    organic_pollution = models.IntegerField()
-    macroscopic_pollution = models.IntegerField()
-    thermal_pollution = models.IntegerField()
+    pathogen_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    inorganic_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    organic_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    macroscopic_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    thermal_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    depletion_risk = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    climate_condition = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    stress = models.DecimalField(max_digits=4, decimal_places=1, default=0)
 
-class Event(models.Model):
-    MAIN_EVENT_CHOICES = (
-        ('climate', 'Climate'),
-        ('pollution', 'Pollution'),
-        ('depletion', 'Depletion'),
-    )
-
+class History(models.Model):
+    source_id = models.ForeignKey(Source)
     author = models.ForeignKey(IzumiUser)
     date_created = models.DateTimeField()
-    last_update = models.DateTimeField()
-    latitude = models.DecimalField(max_digits=8, decimal_places=6, null=False)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=False)
-    event_type = models.CharField(max_length=20, choices=MAIN_EVENT_CHOICES)
+    latitude = models.DecimalField(max_digits=8, decimal_places=6, default=0)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, default=0)
+    d_pathogen_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    d_inorganic_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    d_organic_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    d_macroscopic_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    d_thermal_pollution = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    d_depletion_risk = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    d_climate_condition = models.DecimalField(max_digits=4, decimal_places=1, default=0)
+    d_stress = models.DecimalField(max_digits=4, decimal_places=1, default=0)

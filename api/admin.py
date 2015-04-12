@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Source, Event
+from .models import Source, History
 
 # Register your models here.
 
 admin.site.register(Source)
-admin.site.register(Event)
+admin.site.register(History)

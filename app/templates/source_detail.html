@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block includes %}
+{{ block.super }}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDQ7n1InPq4zJjuhiZGflMlys62OpJue8"
+  type="text/javascript"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="content">
+    {% if isLoggedIn %}
+      <a href="{% url 'update_source' source.id %}">Update</a>
+    {% endif %}
+    <div class="map"></div>
+    <div class="graph"></div>
+
+    <div class="source-history"></div>
+  </div>
+{% endblock %}
+
+{% block react-components %}
+<script type="text/javascript" src="{% static 'js/graph.js' %}"></script>
+<script type="text/jsx" src="{% static 'js/components/SourceMap.react.js' %}"></script>
+<script type="text/jsx" src="{% static 'js/components/SourceMap.react.js' %}"></script>
+{% endblock %}

@@ -47,17 +47,36 @@ class AddSourceForm(forms.Form):
         ('frozen', 'Frozen'),
         ('other', 'Other'),
     )
-    latitude = forms.DecimalField(max_digits=8, decimal_places=6, min_value=-90, max_value=90)
-    longitude = forms.DecimalField(max_digits=9, decimal_places=6, min_value=-180, max_value=180)
+    latitude = forms.DecimalField(max_digits=8, decimal_places=6, min_value=-90, max_value=90, initial="0.000000")
+    longitude = forms.DecimalField(max_digits=9, decimal_places=6, min_value=-180, max_value=180,initial="0.000000")
     source_type = forms.ChoiceField(choices=SOURCE_CHOICES)
-    pathogen_pollution = forms.IntegerField(min_value=0, max_value=100)
-    inorganic_pollution = forms.IntegerField(min_value=0, max_value=100)
-    organic_pollution = forms.IntegerField(min_value=0, max_value=100)
-    macroscopic_pollution = forms.IntegerField(min_value=0, max_value=100)
-    thermal_pollution = forms.IntegerField(min_value=0, max_value=100)
+    pathogen_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    inorganic_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    organic_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    macroscopic_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    thermal_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    climate_condition = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    depletion_risk = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    stress = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
 
     # def clean(self):
     #     pass
 
-class AddEventForm(forms.Form):
-    pass
+class AddHistoryForm(forms.Form):
+    pathogen_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    inorganic_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    organic_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    macroscopic_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    thermal_pollution = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    climate_condition = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    depletion_risk = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+    stress = forms.DecimalField(max_digits=4, decimal_places=1, min_value=0, max_value=100, initial=0)
+
+    def clean(self):
+        zero_count = 0
+        for k, v in self.cleaned_data.items():
+            if not v:
+                zero_count += 1
+        if zero_count == 8:
+            raise forms.ValidationError("No changes made")
+        return self.cleaned_data
