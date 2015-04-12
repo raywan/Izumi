@@ -11,11 +11,25 @@
 {% block content %}
   <div class="content">
     {% if isLoggedIn %}
-      <a href="{% url 'update_source' source.id %}">Update</a>
+      <a class="btn btn-primary" role="button" href="{% url 'update_source' source.id %}" style="float:right">Update</a>
     {% endif %}
     <div class="map"></div>
-    <div class="graph"></div>
+    <div class="source_info">
+      <h2>Details</h2>
+      <h3>@{{source.latitude}}, {{source.longitude}}</h3>
+      <p>last updated <strong>{{source.last_updated}}</strong> by <a href="{% url 'user_profile' source.author %}">{{source.author}}</a></p>
+      <p><strong>Pathogen Pollution:</strong> {{source.pathogen_pollution}}%</p>
+      <p><strong>Inorganic Pollution:</strong> {{source.inorganic_pollution}}%</p>
+      <p><strong>Organic Pollution:</strong> {{source.organic_pollution}}%</p>
+      <p><strong>Macroscopic Pollution:</strong> {{source.macroscopic_pollution}}%</p>
+      <p><strong>Thermal Pollution:</strong> {{source.thermal_pollution}}%</p>
+      <p><strong>Climate Condition:</strong> {{source.climate_condition}}%</p>
+      <p><strong>Depletion Risk:</strong> {{source.depletion_risk}}%</p>
+      <p><strong>Stress:</strong> {{source.stress}}%</p>
+    </div>
 
+    <h2>Stress/Time</h2>
+    <div class="graph"></div>
     <div class="source-history"></div>
   </div>
 {% endblock %}
@@ -23,5 +37,5 @@
 {% block react-components %}
 <script type="text/javascript" src="{% static 'js/graph.js' %}"></script>
 <script type="text/jsx" src="{% static 'js/components/SourceMap.react.js' %}"></script>
-<script type="text/jsx" src="{% static 'js/components/SourceMap.react.js' %}"></script>
+<script type="text/jsx" src="{% static 'js/components/SourceHistory.react.js' %}"></script>
 {% endblock %}

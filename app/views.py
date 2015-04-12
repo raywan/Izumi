@@ -78,7 +78,8 @@ def user_profile(request, username):
 
     context = {
         'isOwner': is_owner,
-        'user': user
+        'user': user,
+        'isLoggedIn': request.user.is_authenticated(),
     }
     return render(request, "user_profile.html", context);
 
@@ -125,11 +126,21 @@ def update_source(request, source_id):
             d_organic_pollution = form.cleaned_data.get('organic_pollution') - source.organic_pollution,
             d_macroscopic_pollution = form.cleaned_data.get('macroscopic_pollution') - source.macroscopic_pollution,
             d_thermal_pollution = form.cleaned_data.get('thermal_pollution') - source.thermal_pollution,
-            d_climate_condition = form.cleaned_data.get('thermal_pollution') - source.climate_condition,
-            d_depletion_risk = form.cleaned_data.get('thermal_pollution') - source.depletion_risk,
-            d_stress = form.cleaned_data.get('thermal_pollution') - source.stress,
+            d_climate_condition = form.cleaned_data.get('climate_condition') - source.climate_condition,
+            d_depletion_risk = form.cleaned_data.get('depletion_risk') - source.depletion_risk,
+            d_stress = form.cleaned_data.get('stress') - source.stress,
         )
         new_history.save()
+        source.last_updated = timezone.now()
+        source.pathogen_pollution = form.cleaned_data.get('pathogen_pollution')
+        source.inorganic_pollution = form.cleaned_data.get('inorganic_pollution')
+        source.organic_pollution = form.cleaned_data.get('organic_pollution')
+        source.macroscopic_pollution = form.cleaned_data.get('macroscopic_pollution')
+        source.thermal_pollution = form.cleaned_data.get('thermal_pollution')
+        source.climate_condition = form.cleaned_data.get('climate_condition')
+        source.depletion_risk = form.cleaned_data.get('depletion_risk')
+        source.stress = form.cleaned_data.get('stress')
+        source.save()
         return HttpResponseRedirect(reverse('source_detail', kwargs={"source_id":source.id}))
     context = {
         'source': source,

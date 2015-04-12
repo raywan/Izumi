@@ -11,7 +11,7 @@ var Map = React.createClass({
       success: function(data, status, jqXHR) {
         var mapOptions = {
           center: new google.maps.LatLng(data.latitude,data.longitude),
-          zoom: 10 
+          zoom: 10
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"),
           mapOptions);
@@ -21,6 +21,7 @@ var Map = React.createClass({
           position: coords,
           map: map,
         });
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
       },
     });
   },

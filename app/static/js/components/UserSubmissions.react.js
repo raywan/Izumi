@@ -1,7 +1,7 @@
 var Source = React.createClass({
   render: function() {
     var href = '/sources/' + this.props.id.toString()
-    var dateCreated = moment(this.props.dateCreated).format('MMMM Do YYYY, h:mm a')
+    var dateCreated = moment(this.props.dateCreated).format('MMMM Do YYYY, h:mm:ss a')
     return (
       <div className="source-item list-group">
         <a href={href} class="list-group-item active">
@@ -18,7 +18,7 @@ var Source = React.createClass({
 var Hist = React.createClass({
   render: function() {
     var href = '/sources/' + this.props.sourceId.toString()
-    var dateCreated = moment(this.props.dateCreated).format('MMMM Do YYYY, h:mm a')
+    var dateCreated = moment(this.props.dateCreated).format('MMMM Do YYYY, h:mm:ss a')
     return (
       <div className="source-item list-group">
         <a href={href} class="list-group-item active">
@@ -48,7 +48,7 @@ var SourceBox = React.createClass({
     });
     return (
       <div className="recent-source-box">
-        <h3>Recent Sources</h3>
+        <h3>Sources Submitted</h3>
         {sources}
       </div>
     );
@@ -80,14 +80,14 @@ var HistoryBox = React.createClass({
     });
     return (
       <div className="recent-history-box">
-        <h3>Recent Changes</h3>
+        <h3>Changes Submitted</h3>
         {history}
       </div>
     );
   }
 });
 
-var UserSubmissions = React.createClass({
+var RecentBox = React.createClass({
   getInitialState: function() {
     return {
       sourceData:[],
@@ -96,9 +96,12 @@ var UserSubmissions = React.createClass({
   },
 
   loadSources: function() {
+    var author = window.location.pathname.split('/')[2]
+    var url = "http://localhost:8000/api/history?sort_date=true&limit=5&author=" + author;
+    console.log(url);
     $.ajax({
       type: "GET",
-      url: "http://localhost:8000/api/sources?sort_date=true&limit=5",
+      url: url,
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(data, status, jqXHR) {
@@ -109,9 +112,12 @@ var UserSubmissions = React.createClass({
     });
   },
   loadHistory: function() {
+    var author = window.location.pathname.split('/')[2]
+    var url = "http://localhost:8000/api/history?sort_date=true&limit=5&author=" + author;
+    console.log(url);
     $.ajax({
       type: "GET",
-      url: "http://localhost:8000/api/history?sort_date=true&limit=5",
+      url: url,
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(data, status, jqXHR) {
@@ -137,4 +143,4 @@ var UserSubmissions = React.createClass({
   }
 });
 
-React.render(<UserSubmissions pollInterval={10000}/>, document.querySelectorAll('.recent-container')[0])
+React.render(<RecentBox pollInterval={10000}/>, document.querySelectorAll('.recent-container')[0])

@@ -21,12 +21,16 @@ class SourceList(generics.ListCreateAPIView):
         sortDate = self.request.QUERY_PARAMS.get('sort_date', None)
         limit = self.request.QUERY_PARAMS.get('limit', None)
         source_id = self.request.QUERY_PARAMS.get('source_id', None)
+        author = self.request.QUERY_PARAMS.get('author', None)
+        print author
+        if source_id is not None:
+            queryset = queryset.filter(source_id=source_id)
+        if author is not None:
+            queryset = queryset.filter(author__user__username=author)
         if sortDate is not None:
             queryset = queryset.order_by('-last_updated')
         if limit is not None:
             queryset = queryset[:limit]
-        if source_id is not None:
-            queryset = queryset.filter(source_id=source_id)
         return queryset
 
 class SourceDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -49,12 +53,15 @@ class HistoryList(generics.ListCreateAPIView):
         sortDate = self.request.QUERY_PARAMS.get('sort_date', None)
         limit = self.request.QUERY_PARAMS.get('limit', None)
         source_id = self.request.QUERY_PARAMS.get('source_id', None)
+        author = self.request.QUERY_PARAMS.get('author', None)
+        if source_id is not None:
+            queryset = queryset.filter(source_id=source_id)
+        if author is not None:
+            queryset = queryset.filter(author__user__username=author)
         if sortDate is not None:
             queryset = queryset.order_by('-date_created')
         if limit is not None:
             queryset = queryset[:limit]
-        if source_id is not None:
-            queryset = queryset.filter(source_id=source_id)
         return queryset
 
 class HistoryDetail(generics.RetrieveUpdateDestroyAPIView):

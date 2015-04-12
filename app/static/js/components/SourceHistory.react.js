@@ -1,15 +1,21 @@
 var Hist = React.createClass({
   render: function() {
-    var href = '/sources/' + this.props.sourceId.toString()
+    var href = '/sources/' + this.props.sourceId.toString();
+    var dateCreated = moment(this.props.dateCreated).format('MMMM Do YYYY, h:mm a');
+    var user_href= '/profile/' + this.props.author;
     return (
-      <a href={href}>
-        <li className="source-item">
-          <p>{this.props.id}</p>
-          <p>{this.props.dPath}</p>
-          <p>{this.props.dInorg}</p>
-          <p>Updated by {this.props.author}</p>
-        </li>
-      </a>
+      <div className="history-item-detail history-item list-group">
+        <h4>Date Updated: {dateCreated} by <a href={user_href}>{this.props.author}</a></h4>
+        <p className="change-header"><strong>Changes (&#916;):</strong></p>
+        <p>Pathogen Pollution: {this.props.dPath}</p>
+        <p>Inorganic Pollution: {this.props.dInorg}</p>
+        <p>Organic Pollution: {this.props.dOrg}</p>
+        <p>Macroscopic Pollution: {this.props.dMacro}</p>
+        <p>Thermal Pollution: {this.props.dTherm}</p>
+        <p>Climate Condition: {this.props.dClimate}</p>
+        <p>Depletion Risk: {this.props.dDepletion}</p>
+        <p>Stress: {this.props.dStress}</p>
+      </div>
     );
   }
 });
@@ -23,7 +29,7 @@ var HistoryBox = React.createClass({
           id={h.id}
           sourceId={h.source_id}
           author={h.author}
-          date={h.date_created}
+          dateCreated={h.date_created}
           dPath={h.d_pathogen_pollution}
           dInorg={h.d_inorganic_pollution}
           dOrg={h.d_organic_pollution}
@@ -37,10 +43,8 @@ var HistoryBox = React.createClass({
     });
     return (
       <div className="history-box">
-        Recent Changes
-        <ul className="history-list">
-          {history}
-        </ul>
+        <h2>Recent Changes</h2>
+        {history}
       </div>
     );
   }
@@ -54,7 +58,7 @@ var SourceHistory = React.createClass({
   },
 
   loadHistory: function() {
-    var url = "http://localhost:8000/api/history?source_id=" + location.pathname.split('/')[2]
+    var url = "http://localhost:8000/api/history?sort_date=true&source_id=" + location.pathname.split('/')[2]
     $.ajax({
       type: "GET",
       url: url,

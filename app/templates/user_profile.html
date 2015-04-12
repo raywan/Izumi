@@ -3,9 +3,12 @@
 
 {% block content %}
   <div class="content">
-    This is my {{ user.username }} profile
+    Now viewing the profile of {{ user.username }}.
+    <h2>Name: {{ user.first_name }}</h2>
+    <div class="recent-container"></div>
   </div>
 {% endblock %}
 
 {% block react-components %}
+<script type="text/jsx" src="{% static 'js/components/UserSubmissions.react.js' %}"></script>
 {% endblock %}

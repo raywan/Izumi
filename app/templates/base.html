@@ -6,27 +6,41 @@
   <title>Izumi</title>
   {% block includes %}
   <link rel="stylesheet" type="text/css" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}" />
-  <script src="{% static 'bower_components/react/JSXTransformer.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  <link href='http://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'>  <script src="{% static 'bower_components/react/JSXTransformer.js' %}"></script>
   <script src="{% static 'bower_components/react/react.min.js' %}"></script>
   <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'bower_components/moment/min/moment.min.js' %}"></script>
   {% endblock %}
 </head>
 
 <body>
   <div class="container">
     <header>
-      <nav>
-        <ul class="nav nav-pills">
-          <li role="presentation"><a href="{% url 'index' %}">Home</a></li>
-          <li role="presentation"><a href="{% url 'directory' %}">Directory</a></li>
-          {% if isLoggedIn %}
-            <li role="presentation"><a href="{% url 'create_source'%}">Add</a></li>
-            <li role="presentation"><a href="{% url 'logout'%}">Logout</a></li>
-          {% else %}
-            <li role="presentation"><a href="{% url 'login' %}">Login</a></li>
-            <li role="presentation"><a href="{% url 'register' %}">Register</a></li>
-          {% endif %}
-        </ul>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="logo navbar-brand" href="{% url 'index' %}"><span>泉</span> Izumi</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">About</a></li>
+              <li><a href="{% url 'directory'%}">Directory</a></li>
+              {% if isLoggedIn %}
+                <li><a href="{% url 'create_source'%}">Add</a></li>
+              {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              {% if isLoggedIn %}
+                <li><a href="{% url 'user_profile' user.username %}">{{user.username}}</a></li>
+                <li role="presentation"><a href="{% url 'logout'%}">Logout</a></li>
+              {% else %}
+                <li role="presentation"><a href="{% url 'login' %}">Login</a></li>
+                <li role="presentation"><a href="{% url 'register' %}">Register</a></li>
+              {% endif %}
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
       </nav>
     </header>
     {% block content %}

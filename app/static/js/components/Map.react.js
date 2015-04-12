@@ -20,6 +20,7 @@ var Map = React.createClass({
             position: coords,
             map: map,
           });
+          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
         }
       },
     });

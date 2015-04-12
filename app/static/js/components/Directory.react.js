@@ -1,15 +1,16 @@
 var Source = React.createClass({
   render: function() {
     var href = '/sources/' + this.props.id.toString()
+    var lastUpdate = moment(this.props.lastUpdated).format('MMMM Do YYYY, h:mm a')
     return (
-      <a href={href}>
-        <li className="source-item">
+      <div className="source-item list-group">
+        <a href={href} class="list-group-item active">
+          <h4 className="list-group-item-heading">@{this.props.lat}, {this.props.lng}</h4>
           <p>Type: {this.props.sourceType}</p>
-          <p>Coordinates: {this.props.lat}, {this.props.lng}</p>
-          <p>Last Update: {this.props.lastUpdated}</p>
+          <p>Last Update: {lastUpdate}</p>
           <p>Source by {this.props.author}</p>
-        </li>
-      </a>
+        </a>
+      </div>
     );
   }
 });
@@ -76,9 +77,7 @@ var SourceBox = React.createClass({
     });
     return (
       <div className="source-box">
-        <ul className="source-list">
-          {sources}
-        </ul>
+        {sources}
       </div>
     );
   }
@@ -91,8 +90,8 @@ var Filter = React.createClass({
   render: function() {
 
     return (
-      <select onChange={this.onUserChange}>
-        <option value='none'></option>
+      <select className="form-control" onChange={this.onUserChange}>
+        <option value="" disabled selected>Sorting Options</option>
         <option value="lat">Latitude</option>
         <option value="lat_r">Latitude - reverse</option>
         <option value="long">Longitude</option>

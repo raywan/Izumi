@@ -1,3 +1,53 @@
-.container {
-  background-color: red;
+body {
+  font-family: 'Merriweather', serif;
+}
+
+.logo {
+  font-size:24px;
+  color: #0074D9!important;
+}
+.logo > span {
+  font-size: 30px;
+  border: solid 1px;
+}
+
+.map {
+  padding-bottom:25px;
+}
+
+.source-item, .history-item {
+  border: solid 1px #0074D9;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+}
+
+.recent-source-box {
+  display:inline-block;
+  width:50%;
+  padding-right:20px
+}
+.recent-history-box {
+  display:inline-block;
+  width:50%;
+  vertical-align:top;
+}
+.source-item:hover {
+  background:whitesmoke;
+}
+
+.source-item a {
+  text-decoration:none;
+}
+
+.source-item a p {
+  color: #333;
+}
+
+.directory > select {
+  margin-bottom: 20px;
+}
+
+.history-item-detail > p:not(.change-header) {
+  font-size: 11px;
 }
