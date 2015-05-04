@@ -1,10 +1,16 @@
 #Izumi
 
+Space Apps Toronto 2015 - Honorable Mention
+
+###Dependencies
+```
+$ pip install django
+$ pip install djangorestframework
+```
+
 ###Installation
 ```
 $ git clone https://github.com/hxaki/Izumi.git
-$ pip install django
-$ pip install djangorestframework
 $ bower install
 
 $ ./manage.py migrate
