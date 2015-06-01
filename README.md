@@ -1,6 +1,6 @@
 #Izumi
 
-:star: Space Apps Toronto 2015 - Honorable Mention :star:
+:star: Space Apps Toronto 2015 - [Honorable Mention](https://twitter.com/SpaceAppsTO/status/587444657132589058) :star:
 
 ###Dependencies
 ```
@@ -16,3 +16,11 @@ $ bower install
 $ ./manage.py migrate
 % ./manage.py runserver
 ```
+###Screenshots
+
+####Home
+![Izumi Homepage](/screenshots/izumi_home.png)
+####Details
+![Izumi Details](/screenshots/izumi_detail.png)
+####Directory
+![Izumi Directory](/screenshots/izumi_dir.png)
