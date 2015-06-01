@@ -1,6 +1,6 @@
 #Izumi
 
-:star: Space Apps Toronto 2015 - [Honorable Mention](https://twitter.com/SpaceAppsTO/status/58744465713258905 8) :star:
+:star: Space Apps Toronto 2015 - [Honorable Mention](https://twitter.com/SpaceAppsTO/status/587444657132589058) :star:
 
 ###Dependencies
 ```
