@@ -1,6 +1,6 @@
 #Izumi
 
-:star: Space Apps Toronto 2015 - [Honorable Mention](https://twitter.com/SpaceAppsTO/status/587444657132589058) :star:
+:star: Space Apps Toronto 2015 - [Honorable Mention](https://twitter.com/SpaceAppsTO/status/58744465713258905 8) :star:
 
 ###Dependencies
 ```
@@ -21,6 +21,6 @@ $ ./manage.py migrate
 ####Home
 ![Izumi Homepage](/screenshots/izumi_home.png)
 ####Details
-![Izumi Details](/screenshots/izumi_detail.png)
+![Izumi Details](/screenshots/izumi_details.png)
 ####Directory
 ![Izumi Directory](/screenshots/izumi_dir.png)
