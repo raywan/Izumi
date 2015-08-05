@@ -12,7 +12,7 @@ $ pip install djangorestframework
 
 ###Installation
 ```
-$ git clone https://github.com/hxaki/Izumi.git
+$ git clone https://github.com/raywan/Izumi.git
 $ bower install
 
 $ ./manage.py migrate
